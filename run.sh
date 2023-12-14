@@ -1,5 +1,5 @@
 #!/bin/bash
 
-mvn clean install -DskipTests assembly:single -q
-docker build -t messenger.jar .
-docker run messenger.jar
+mvn clean install
+docker build -t messenger .
+docker run -p 6969:8080 messenger
