@@ -2,6 +2,8 @@ package com.rio.demo.model;
 
 
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 public class User {
     private String username;
@@ -12,9 +14,11 @@ public class User {
     public User(String username, String password) {
         this.username = username;
         this.password = password;
+        this.chats = new HashMap<>();
     }
 
     public User() {
+        this.chats = new HashMap<>();
     }
 
     public void setUsername(String username) {
@@ -52,9 +56,13 @@ public class User {
     public User clone(){
         User user = new User();
         user.setUsername(this.username);
-        user.setChats(this.getChats());
         user.setPassword(this.password);
         user.setToken(this.getToken());
+        if(Objects.nonNull(this.chats)){
+            for (Map.Entry<String, Chat> eachChat : this.chats.entrySet()) {
+                user.chats.put(eachChat.getKey(), eachChat.getValue().clone());
+            }
+        }
         return user;
     }
 }

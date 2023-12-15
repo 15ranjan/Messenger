@@ -1,5 +1,6 @@
 package com.rio.demo.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Chat {
@@ -7,6 +8,7 @@ public class Chat {
     private List<Message> messages;
 
     public Chat() {
+        this.messages = new ArrayList<>();
     }
 
     public String getUsername() {
@@ -27,8 +29,12 @@ public class Chat {
 
     public Chat clone(){
         Chat chat = new Chat();
-        chat.setMessages(this.getMessages());
         chat.setUsername(this.getUsername());
+        List<Message> temp = new ArrayList<>();
+        for(Message message: this.getMessages()){
+            temp.add(message.clone());
+        }
+        chat.setMessages(temp);
         return chat;
     }
 }

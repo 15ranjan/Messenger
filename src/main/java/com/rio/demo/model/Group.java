@@ -1,5 +1,6 @@
 package com.rio.demo.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Group {
@@ -14,6 +15,8 @@ public class Group {
     public Group(String groupName) {
         this.groupName = groupName;
         this.groupId = String.valueOf(getUniqueId());
+        this.usernames = new ArrayList<>();
+        this.messages = new ArrayList<>();
     }
 
     public void setGroupId(String groupId) {
@@ -52,4 +55,5 @@ public class Group {
     private int getUniqueId() {
         return id++;
     }
+
 }
