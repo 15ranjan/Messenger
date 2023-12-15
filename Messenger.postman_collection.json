@@ -9,20 +9,22 @@
 		{
 			"name": "test API",
 			"request": {
+				"auth": {
+					"type": "noauth"
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/api/v1/user/Princess/hello",
+					"raw": "localhost:6969/api/v1/hello/prince",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "6969",
 					"path": [
 						"api",
 						"v1",
-						"user",
-						"Princess",
-						"hello"
+						"hello",
+						"prince"
 					]
 				}
 			},
@@ -43,11 +45,11 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/api/v1/user",
+					"raw": "localhost:6969/api/v1/user",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "6969",
 					"path": [
 						"api",
 						"v1",
@@ -63,8 +65,34 @@
 				"disableBodyPruning": true
 			},
 			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "8e2503fa-7ea4-4c2f-86f3-791f1a8aaf2b",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "user",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "username",
+						"value": "prince2",
+						"type": "text"
+					},
+					{
+						"key": "apiKey",
+						"value": "prince2123",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "",
@@ -75,11 +103,11 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/api/v1/user",
+					"raw": "localhost:6969/api/v1/user",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "6969",
 					"path": [
 						"api",
 						"v1",
@@ -93,10 +121,16 @@
 			"name": "send message user to user",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "apiKey",
+						"value": "prince123",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"to\" : \"prince\",\r\n    \"text\" : \"Hello\"\r\n}",
+					"raw": "{\r\n    \"to\" : \"prince1\",\r\n    \"text\" : \"hey\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -104,16 +138,16 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/api/v1/user/prince1/message",
+					"raw": "localhost:6969/api/v1/user/prince/message",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "6969",
 					"path": [
 						"api",
 						"v1",
 						"user",
-						"prince1",
+						"prince",
 						"message"
 					]
 				}
@@ -124,13 +158,19 @@
 			"name": "get all chats for a user",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "apiKey",
+						"value": "prince123",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "localhost:8080/api/v1/user/prince/message/all",
+					"raw": "localhost:6969/api/v1/user/prince/message/all",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "6969",
 					"path": [
 						"api",
 						"v1",
@@ -147,18 +187,24 @@
 			"name": "get unread messages of a user",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "apiKey",
+						"value": "prince1123",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "localhost:8080/api/v1/user/prince/message",
+					"raw": "localhost:6969/api/v1/user/prince1/message",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "6969",
 					"path": [
 						"api",
 						"v1",
 						"user",
-						"prince",
+						"prince1",
 						"message"
 					]
 				}
@@ -169,25 +215,92 @@
 			"name": "get chat history with a friend (user to user)",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "apiKey",
+						"value": "prince123",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "localhost:8080/api/v1/user/prince1/message?friend=prince",
+					"raw": "localhost:6969/api/v1/user/prince/message?friend=prince1",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "6969",
 					"path": [
 						"api",
 						"v1",
 						"user",
-						"prince1",
+						"prince",
 						"message"
 					],
 					"query": [
 						{
 							"key": "friend",
-							"value": "prince"
+							"value": "prince1"
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\" : \"prince\",\r\n    \"password\" : \"prince123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:6969/api/v1/login",
+					"host": [
+						"localhost"
+					],
+					"port": "6969",
+					"path": [
+						"api",
+						"v1",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logout",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\" : \"prince2\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:6969/api/v1/logout",
+					"host": [
+						"localhost"
+					],
+					"port": "6969",
+					"path": [
+						"api",
+						"v1",
+						"logout"
 					]
 				}
 			},
