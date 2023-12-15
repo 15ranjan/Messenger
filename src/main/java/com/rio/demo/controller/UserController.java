@@ -18,7 +18,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @GetMapping("/user/{name}/hello")
+    @GetMapping("/hello/{name}")
     public String sayHello(@PathVariable String name){
         return String.format("Hello %s", name);
     }
@@ -29,26 +29,36 @@ public class UserController {
     }
 
     @GetMapping("/user")
-    public ResponseEntity<GetUserResponse> getUsers(){
-        return userService.getUsers();
+    public ResponseEntity<GetUserResponse> getUsers(@RequestHeader("username") String username, @RequestHeader("apiKey") String apiKey){
+        return userService.getUsers(username, apiKey);
     }
 
     @PostMapping("/user/{fromUsername}/message")
-    public ResponseEntity<Response> sendMessage(@PathVariable String fromUsername, @RequestBody Message message){
-        return userService.sendMessage(fromUsername, message);
+    public ResponseEntity<Response> sendMessage(@PathVariable String fromUsername, @RequestBody Message message, @RequestHeader("apiKey") String apiKey){
+        return userService.sendMessage(fromUsername, message, apiKey);
     }
 
     @GetMapping("/user/{fromUsername}/message")
-    public ResponseEntity<ChatDTO> getUnreadMessages(@PathVariable String fromUsername, @RequestParam(required = false) String friend){
+    public ResponseEntity<ChatDTO> getUnreadMessages(@PathVariable String fromUsername, @RequestParam(required = false) String friend, @RequestHeader("apiKey") String apiKey){
         if(Objects.nonNull(friend)){
-            return userService.getChatHistoryWithUser(fromUsername, friend);
+            return userService.getChatHistoryWithUser(fromUsername, friend, apiKey);
         }
-        return userService.getUnreadMessages(fromUsername);
+        return userService.getUnreadMessages(fromUsername, apiKey);
     }
 
     @GetMapping("/user/{fromUsername}/message/all")
-    public ResponseEntity<AllChatHistoryDTO> getAllChatHistory(@PathVariable String fromUsername){
-        return userService.getAllChatHistory(fromUsername);
+    public ResponseEntity<AllChatHistoryDTO> getAllChatHistory(@PathVariable String fromUsername, @RequestHeader("apiKey") String apiKey){
+        return userService.getAllChatHistory(fromUsername, apiKey);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponseDTO> login(@RequestBody UserRequestDTO userRequestDTO) {
+        return userService.login(userRequestDTO);
+    }
+
+    @PostMapping(value = "/logout")
+    public ResponseEntity<Response> logout(@RequestBody() UserRequestDTO userRequestDTO) {
+        return userService.logout(userRequestDTO);
     }
 
 }

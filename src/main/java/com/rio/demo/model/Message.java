@@ -1,8 +1,6 @@
 package com.rio.demo.model;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Message {
     private static long id = 0;

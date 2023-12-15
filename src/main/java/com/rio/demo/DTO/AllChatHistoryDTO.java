@@ -3,7 +3,6 @@ package com.rio.demo.DTO;
 import com.rio.demo.model.Chat;
 
 import java.util.HashMap;
-import java.util.List;
 
 public class AllChatHistoryDTO extends Response{
     HashMap<String, Chat> chats;

@@ -1,6 +1,7 @@
 package com.rio.demo.model;
 
 
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -9,6 +10,7 @@ public class User {
     private String username;
     private String password;
     private String token;
+    private Timestamp validTill;
     private HashMap<String, Chat> chats;
 
     public User(String username, String password) {
@@ -49,6 +51,14 @@ public class User {
         return token;
     }
 
+    public Timestamp getValidTill() {
+        return validTill;
+    }
+
+    public void setValidTill(Timestamp validTill) {
+        this.validTill = validTill;
+    }
+
     public HashMap<String, Chat> getChats() {
         return chats;
     }
@@ -58,6 +68,7 @@ public class User {
         user.setUsername(this.username);
         user.setPassword(this.password);
         user.setToken(this.getToken());
+        user.setValidTill(this.validTill);
         if(Objects.nonNull(this.chats)){
             for (Map.Entry<String, Chat> eachChat : this.chats.entrySet()) {
                 user.chats.put(eachChat.getKey(), eachChat.getValue().clone());
